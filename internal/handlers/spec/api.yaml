@@ -736,7 +736,7 @@ components:
           minLength: 8
           maxLength: 9
           x-go-extra-tags:
-            validate: 'required,regexp=^\d{5}-?\d{3}$'
+            validate: 'required,min=8,max=9'
         complement:
           type: string
           description: Complemento do endereço (opcional)

@@ -86,20 +86,6 @@ func (api *Handlers) PostCreateClient(w http.ResponseWriter, r *http.Request) *s
 		ID:      id.String(),
 	})
 
-	// TODO: Implementar a lógica de criação do cliente
-	// Use o userID conforme necessário (ex: associar o cliente ao usuário)
-	// api.validator.RegisterValidation("cpf_cnpj", func(fl validator.FieldLevel) bool {
-	// 	v := strings.NewReplacer(".", "", "-", "", "/", "").Replace(fl.Field().String())
-	// 	if len(v) == 11 {
-	// 		return cpf.IsValid(v)
-	// 	}
-	// 	if len(v) == 14 {
-	// 		return cnpj.IsValid(v)
-	// 	}
-	// 	return false
-	// })
-
-	panic("not implemented")
 }
 
 // Get all clients
