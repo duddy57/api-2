@@ -1,5 +1,5 @@
 ## Builder Stage
-FROM --platform=linux/arm64 golang:1.24-alpine AS builder
+FROM golang:1.24-alpine AS builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
@@ -11,7 +11,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build \
     -o ./dist/api ./cmd/main.go
 
 ## Api Stage
-FROM --platform=linux/arm64 alpine:latest
+FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /app
 COPY --from=builder /app/dist/api .
