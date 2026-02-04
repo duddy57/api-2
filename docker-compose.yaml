@@ -8,6 +8,7 @@ services:
       - GOOSE_DBSTRING=host=db user=${DB_USER} password=${DB_PASSWORD} port=${DB_PORT} dbname=${DB_NAME} sslmode=${DB_SSL_MODE}
   api:
     build: .
+    platform: linux/arm64
     depends_on:
       migrate:
         condition: service_completed_successfully
