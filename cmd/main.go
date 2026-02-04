@@ -114,7 +114,8 @@ func run(ctx context.Context) (err error) {
 		defer cancel()
 
 		if err := srv.Shutdown(ctx); err != nil {
-			fmt.Errorf(err.Error())
+			fmt.Fprintln(os.Stderr, err.Error())
+			os.Exit(1)
 		}
 	}()
 
