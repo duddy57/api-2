@@ -1,0 +1,51 @@
+services:
+  migrate:
+    image: kukymbr/goose-docker:3.24.2
+    volumes:
+      - ./internal/store/pgstore/migrations:/migrations
+    environment:
+      - GOOSE_DRIVER=postgres
+      - GOOSE_DBSTRING=host=db user=${DB_USER} password=${DB_PASSWORD} port=${DB_PORT} dbname=${DB_NAME} sslmode=${DB_SSL_MODE}
+  api:
+    build: .
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "8080:8080"
+    environment:
+    - DB_HOST=${DB_HOST}
+    - DB_PORT=${DB_PORT}
+    - DB_USER=${DB_USER}
+    - DB_PASSWORD=${DB_PASSWORD}
+    - DB_NAME=${DB_NAME}
+    - DB_SSL_MODE=${DB_SSL_MODE}
+
+    - DB_MAX_OPEN_CONNS=${DB_MAX_OPEN_CONNS}
+    - DB_MAX_IDLE_CONNS=${DB_MAX_IDLE_CONNS}
+    - DB_MAX_LIFETIME=${DB_MAX_LIFETIME}
+    - REDIS_URL=${REDIS_URL}
+    - SERVER_URL=${SERVER_URL}
+    - FRONTEND_URL=${FRONTEND_URL}
+
+    - GOOSE_MIGRATIONS_DIR=${GOOSE_MIGRATIONS_DIR}
+
+
+    - REDIS_HOST=${REDIS_HOST}
+    - REDIS_PORT=${REDIS_PORT}
+    - REDIS_DB=${REDIS_DB}
+
+    - SERVER_READ_TIMEOUT=${SERVER_READ_TIMEOUT}
+    - SERVER_WRITE_TIMEOUT=${SERVER_WRITE_TIMEOUT}
+    - SERVER_IDLE_TIMEOUT=${SERVER_IDLE_TIMEOUT}
+
+    - NOMINATIM_URL=${NOMINATIM_URL}
+    - JWT_SECRET=${JWT_SECRET}
+
+    - TZ=America/Sao_Paulo
+    restart: unless-stopped
+
+  
+
+
+

@@ -1,0 +1,1414 @@
+openapi: 3.0.0
+x-stoplight:
+  id: p68es9u3g81fg
+info:
+  title: Swagger olidesk API
+  description: This is documentation for the Olidesk API.
+  contact: {}
+  version: 3.0.0
+  license:
+    name: ""
+servers:
+  - url: /api
+    description: ""
+security:
+  - BearerAuth: []
+paths:
+  /v1/users/create:
+    post:
+      tags:
+        - Users
+      summary: Create a new user
+      description: Create a new user
+      operationId: postCreateUser
+      requestBody:
+        description: Create user body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CriarUsuario"
+        required: true
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-codegen-request-body-name: request
+      x-stoplight:
+        id: q1exhlo76lrza
+  /v1/users/delete:
+    delete:
+      tags:
+        - Users
+      summary: Delete user
+      description: Delete user profile
+      operationId: deleteUserAccount
+      responses:
+        "204":
+          description: Recurso removido com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp204"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized - No active session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: axy6btm6ahxjz
+  /v1/users/details:
+    get:
+      tags:
+        - Users
+      summary: Get user
+      description: Get user details
+      operationId: getUserAccount
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuscaUsuario"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized - No active session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: d3yvp8kmm6jb9
+  /v1/users/login:
+    post:
+      tags:
+        - Users
+      summary: Login user
+      description: Login a user
+      operationId: postLoginUser
+      requestBody:
+        description: User data
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginRes"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-codegen-request-body-name: request
+      x-stoplight:
+        id: 17ro5fu530gx5
+  /v1/users/update:
+    put:
+      tags:
+        - Users
+      summary: Update user
+      description: Update user details
+      operationId: putUpdateUser
+      requestBody:
+        description: User details
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AtualizarUsuario"
+        required: true
+      responses:
+        "204":
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp204"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized - No active session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-codegen-request-body-name: user
+      x-stoplight:
+        id: t12nxxgr8z5ca
+
+  /v1/clients/create:
+    post:
+      tags:
+        - Clientes
+      summary: Create client
+      description: Create a client
+      operationId: postCreateClient
+      requestBody:
+        description: Client Create Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CriarCliente"
+        required: true
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-codegen-request-body-name: request
+      x-stoplight:
+        id: ls0jhujwiqhjz
+  "/v1/clients/delete/{clientID}":
+    delete:
+      tags:
+        - Clientes
+      summary: Delete client
+      description: Delete a client by ID
+      operationId: deleteClient
+      parameters:
+        - name: clientID
+          in: path
+          description: Client ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp204"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: yfbzkckutr1r0
+  /v1/clients/list:
+    get:
+      tags:
+        - Clientes
+      summary: Get all clients
+      description: Get all clients
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaClientes"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: hq5btpxlbdbxg
+  "/v1/clients/update/{clientID}":
+    put:
+      tags:
+        - Clientes
+      summary: Update client
+      description: Update a client by ID
+      operationId: putClient
+      parameters:
+        - name: clientID
+          in: path
+          description: Client ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Client Update Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AtualizarCliente"
+        required: true
+      responses:
+        "204":
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp204"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-codegen-request-body-name: request
+      x-stoplight:
+        id: 4q2u0bda1q3wb
+  "/v1/clients/{clientID}":
+    get:
+      tags:
+        - Clientes
+      summary: Get client by ID
+      description: Get a client by ID
+      operationId: getByIdClient
+      parameters:
+        - name: clientID
+          in: path
+          description: Client ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuscaCliente"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unathorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: e4jtnwezz2bnj
+
+  /v1/forms/create:
+    post:
+      tags:
+        - Atendimentos
+      summary: Form client
+      description: Create a new form
+      operationId: postCreateForm
+      requestBody:
+        description: Form Create Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CriarFormulario"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-codegen-request-body-name: request
+      x-stoplight:
+        id: qecvmamf1fv8f
+  "/v1/forms/delete/{formID}":
+    delete:
+      tags:
+        - Atendimentos
+      summary: Delete form
+      description: Delete a form by ID
+      operationId: deleteForm
+      parameters:
+        - name: formID
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp204"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: sm8y9jq6wktux
+  /v1/forms/list:
+    get:
+      tags:
+        - Atendimentos
+      summary: List forms
+      description: Get all forms
+      operationId: listForms
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaFormulario"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: 15q1rrm11al3r
+  "/v1/forms/update/{formID}":
+    put:
+      tags:
+        - Atendimentos
+      summary: Update form
+      description: Update a form by ID
+      operationId: putForm
+      parameters:
+        - name: formID
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Form Update Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AtualizarFormulario"
+        required: true
+      responses:
+        "204":
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resp204"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-codegen-request-body-name: request
+      x-stoplight:
+        id: a99k4a8qkd1ih
+  "/v1/forms/{formID}":
+    get:
+      tags:
+        - Atendimentos
+      summary: Get forms
+      description: Get a forms by ID
+      operationId: getFormById
+      parameters:
+        - name: formID
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuscaFormulario"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: wjhdm4v9cpkgb
+
+  /v1/members/list:
+    get:
+      tags:
+        - Members
+      summary: Get members
+      description: Get all members
+      operationId: listMembers
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaUsuarios"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized - No active session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - BearerAuth: []
+      x-stoplight:
+        id: y095rj3g0kdx3
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Endereco:
+      type: object
+      properties:
+        rua:
+          type: string
+          description: Rua da residência
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        numero:
+          type: string
+          description: Número da residência
+          minLength: 1
+          maxLength: 10
+          example: 123A
+          x-go-extra-tags:
+            validate: "required,min=1,max=10"
+        bairro:
+          type: string
+          description: Bairro da residência
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        cidade:
+          type: string
+          description: Cidade da residencia
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        estado:
+          type: string
+          description: UF do estado da residencia
+          example: SP
+          minLength: 2
+          maxLength: 2
+          x-go-extra-tags:
+            validate: "required,min=2,max=2"
+        pais:
+          type: string
+          description: UF do pais da residencia
+          example: BR
+          minLength: 2
+          maxLength: 2
+          x-go-extra-tags:
+            validate: "required,min=2,max=2"
+        cep:
+          type: string
+          description: CEP brasileiro
+          example: 01310-100
+          pattern: '^\d{5}-?\d{3}$'
+          minLength: 8
+          maxLength: 9
+          x-go-extra-tags:
+            validate: 'required,regexp=^\d{5}-?\d{3}$'
+        complement:
+          type: string
+          description: Complemento do endereço (opcional)
+          maxLength: 100
+          x-go-extra-tags:
+            validate: "omitempty,max=100"
+        latitude:
+          type: number
+          format: double
+          description: Latitude geográfica (opcional)
+          minimum: -90
+          maximum: 90
+          x-go-extra-tags:
+            validate: "omitempty,gte=-90,lte=90"
+        longitude:
+          type: number
+          format: double
+          description: Longitude geográfica (opcional)
+          minimum: -180
+          maximum: 180
+          x-go-extra-tags:
+            validate: "omitempty,gte=-180,lte=180"
+      required:
+        - rua
+        - numero
+        - bairro
+        - cidade
+        - estado
+        - pais
+        - cep
+        - complement
+        - latitude
+        - longitude
+      x-stoplight:
+        id: zb51ivuoxzi8h
+    Cliente:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-extra-tags:
+            validate: "required,uuid"
+        nome_cliente:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        tipo_cliente:
+          type: string
+          enum:
+            - avulso
+            - contrato
+          x-go-extra-tags:
+            validate: "required,oneof=avulso contrato"
+        cnpj_ou_cpf:
+          type: string
+          description: CPF ou CNPJ (com ou sem máscara)
+          example: 12.345.678/0001-90
+          minLength: 11
+          maxLength: 18
+          x-go-extra-tags:
+            validate: "required,cpf_cnpj"
+
+        email_contato:
+          type: string
+          description: Email de contato
+          example: contato@sperium.net
+          format: email
+          maxLength: 254
+          x-go-extra-tags:
+            validate: "omitempty,email"
+        telefone_contato:
+          type: string
+          description: "Telefone de contato no formato E.164 (ex: +5511912345678)"
+          example: "+5511912345678"
+          minLength: 10
+          maxLength: 16
+          pattern: "^\\+[1-9]\\d{1,14}$"
+          x-go-extra-tags:
+            validate: "omitempty,e164"
+        nome_contato:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        endereco:
+          $ref: "#/components/schemas/Endereco"
+
+        created_at:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+        updated_at:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+      required:
+        - id
+        - nome_cliente
+        - tipo_cliente
+        - cnpj_ou_cpf
+        - email_contato
+        - telefone_contato
+        - nome_contato
+        - endereco
+        - created_at
+        - updated_at
+      x-stoplight:
+        id: l30zib79d24rg
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-extra-tags:
+            validate: "required,uuid"
+        email:
+          type: string
+          description: Email de contato
+          example: contato@sperium.net
+          format: email
+          maxLength: 254
+          x-go-extra-tags:
+            validate: "omitempty,email"
+        nome:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        cargo:
+          type: string
+          x-go-extra-tags:
+            validate: "required"
+        created_at:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+        updated_at:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+      required:
+        - id
+        - nome
+        - email
+        - cargo
+        - created_at
+        - updated_at
+      x-stoplight:
+        id: 9ypnyvjf3h1tr 
+    Tecnico:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-extra-tags:
+            validate: "required,uuid"
+        nome:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+      required:
+        - id
+        - nome
+    Formulario:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-extra-tags:
+            validate: "required,uuid"
+        descricao_defeito:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        data_ocorrencia:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+        nivel_dificuldade:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          x-go-extra-tags:
+            validate: "required,oneof=low medium high"
+        solicitante:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        descricao_solucao:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        tecnicos_responsavel:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/Tecnico"
+          x-go-extra-tags:
+            validate: "required,min=1,dive,uuid"
+        created_at:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+        updated_at:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+      required:
+        - id
+        - descricao_defeito
+        - data_ocorrencia
+        - nivel_dificuldade
+        - solicitante
+        - descricao_solucao
+        - tecnicos_responsavel
+        - created_at
+        - updated_at 
+
+    CriarCliente:
+      type: object
+      properties:
+        nome_cliente:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        tipo_cliente:
+          type: string
+          enum:
+            - avulso
+            - contrato
+          x-go-extra-tags:
+            validate: "required,oneof=avulso contrato"
+        cnpj_ou_cpf:
+          type: string
+          description: CPF ou CNPJ (com ou sem máscara)
+          example: 12.345.678/0001-90
+          minLength: 11
+          maxLength: 18
+          x-go-extra-tags:
+            validate: "required,cpf_cnpj"
+        endereco:
+          $ref: "#/components/schemas/Endereco"
+        email_contato:
+          type: string
+          description: Email de contato
+          example: contato@sperium.net
+          format: email
+          maxLength: 254
+          x-go-extra-tags:
+            validate: "omitempty,email"
+        telefone_contato:
+          type: string
+          description: "Telefone de contato no formato E.164 (ex: +5511912345678)"
+          example: "+5511912345678"
+          minLength: 10
+          maxLength: 16
+          pattern: "^\\+[1-9]\\d{1,14}$"
+          x-go-extra-tags:
+            validate: "omitempty,e164"
+        nome_contato:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+      required:
+        - nome_cliente
+        - tipo_cliente
+        - cnpj_ou_cpf
+        - endereco
+        - email_contato
+        - telefone_contato
+        - nome_contato
+      x-stoplight:
+        id: rqvvp4tb0o35u
+    CriarFormulario:
+      type: object
+      properties:
+        cliente_id:
+          type: string
+          format: uuid
+          x-go-extra-tags:
+            validate: "required,uuid"
+        descricao_defeito:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        data_ocorrencia:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+        nivel_dificuldade:
+          type: string
+          description: Nível de dificuldade
+          example: medium
+          enum:
+            - low
+            - medium
+            - high
+          x-go-extra-tags:
+            validate: "required,oneof=low medium high"
+        solicitante:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        descricao_solucao:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        tecnicos_responsavel:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+          x-go-extra-tags:
+            validate: "required,min=1,dive,uuid"
+      required:
+        - cliente_id
+        - descricao_defeito
+        - data_ocorrencia
+        - nivel_dificuldade
+        - solicitante
+        - descricao_solucao
+        - tecnicos_responsavel
+      x-stoplight:
+        id: fpat2ujtigjl3
+    CriarUsuario:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email de contato
+          example: contato@sperium.net
+          format: email
+          maxLength: 254
+          x-go-extra-tags:
+            validate: "omitempty,email"
+
+        nome:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+
+        cargo:
+          type: string
+          enum:
+            - tecnico_interno
+            - tecnico_externo
+            - administrador
+          x-go-extra-tags:
+            validate: "required,oneof=tecnico_interno tecnico_externo administrador"
+
+        password:
+          type: string
+          description: Senha do usuário
+          format: password
+          minLength: 8
+          maxLength: 64
+          pattern: "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[^A-Za-z\\d]).{8,64}$"
+          x-go-extra-tags:
+            validate: "required,min=8,max=64"
+      required:
+        - "email"
+        - "nome"
+        - "cargo"
+        - "password"
+      x-stoplight:
+        id: 9ypnyvjf3h1tr
+
+    LoginReq:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email de contato
+          example: contato@sperium.net
+          format: email
+          maxLength: 254
+          x-go-extra-tags:
+            validate: "required,email"
+        password:
+          type: string
+          description: Senha do usuário
+          format: password
+          minLength: 8
+          maxLength: 64
+          pattern: "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[^A-Za-z\\d]).{8,64}$"
+          x-go-extra-tags:
+            validate: "required,min=8,max=64"
+      required:
+        - email
+        - password
+      x-stoplight:
+        id: rxj62f0yqy7bw
+
+    BuscaUsuario:
+      type: object
+      properties:
+        usuario:
+          $ref: "#/components/schemas/Usuario"
+      x-stoplight:
+        id: wz0ncbjz5mu15
+    BuscaCliente:
+      type: object
+      properties:
+        cliente:
+          $ref: "#/components/schemas/Cliente"
+      x-stoplight:
+        id: 8e38g4q0idtr0
+    BuscaFormulario:
+      type: object
+      properties:
+        formulario:
+          $ref: "#/components/schemas/Formulario"
+      required:
+        - formulario
+      x-stoplight:
+        id: 92suhdi9vu0ka
+
+    LoginRes:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: JWT de acesso
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        token_type:
+          type: string
+          example: "Bearer"
+        expires_in:
+          type: integer
+          description: Tempo de expiração em segundos
+          example: 3600
+      required:
+        - access_token
+        - token_type
+      x-stoplight:
+        id: lypfoakamq7ky
+
+    ListaClientes:
+      type: object
+      properties:
+        clientes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Cliente"
+      required:
+        - clientes
+      x-stoplight:
+        id: 3vdnhgdpjsujh
+    ListaFormulario:
+      type: object
+      properties:
+        formularios:
+          type: array
+          items:
+            $ref: "#/components/schemas/Formulario"
+      required:
+        - formularios
+      x-stoplight:
+        id: g78fhwsr9hg39
+    ListaUsuarios:
+      type: object
+      properties:
+        usuarios:
+          type: array
+          items:
+            $ref: "#/components/schemas/Usuario"
+      required:
+        - usuarios
+      x-stoplight:
+        id: 0i3tcwsl7duvd
+
+    AtualizarUsuario:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email de contato
+          example: contato@sperium.net
+          format: email
+          maxLength: 254
+          x-go-extra-tags:
+            validate: "omitempty,email"
+        nome:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "omitempty,min=2,max=500"
+      x-stoplight:
+        id: ns8rf2dso4t55
+    AtualizarCliente:
+      type: object
+      properties:
+        nome_cliente:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        tipo_cliente:
+          type: string
+          enum:
+            - avulso
+            - contrato
+          x-go-extra-tags:
+            validate: "required,oneof=avulso contrato"
+        cnpj_ou_cpf:
+          type: string
+          description: CPF ou CNPJ (com ou sem máscara)
+          example: 12.345.678/0001-90
+          minLength: 11
+          maxLength: 18
+          x-go-extra-tags:
+            validate: "required,cpf_cnpj"
+        endereco:
+          $ref: "#/components/schemas/Endereco"
+        email_contato:
+          type: string
+          description: Email de contato
+          example: contato@sperium.net
+          format: email
+          maxLength: 254
+          x-go-extra-tags:
+            validate: "omitempty,email"
+        telefone_contato:
+          type: string
+          description: "Telefone de contato no formato E.164 (ex: +5511912345678)"
+          example: "+5511912345678"
+          minLength: 10
+          maxLength: 16
+          pattern: "^\\+[1-9]\\d{1,14}$"
+          x-go-extra-tags:
+            validate: "omitempty,e164"
+        nome_contato:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+      required:
+        - nome_cliente
+        - tipo_cliente
+        - cnpj_ou_cpf
+        - endereco
+        - email_contato
+        - telefone_contato
+        - nome_contato
+      x-stoplight:
+        id: 0mgs8wma42w1m
+    AtualizarFormulario:
+      type: object
+      properties:
+        descricao_defeito:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        data_ocorrencia:
+          type: string
+          format: date-time
+          x-go-extra-tags:
+            validate: "required"
+        nivel_dificuldade:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          x-go-extra-tags:
+            validate: "required,oneof=low medium high"
+        solicitante:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        descricao_solucao:
+          type: string
+          minLength: 2
+          maxLength: 500
+          x-go-extra-tags:
+            validate: "required,min=2,max=500"
+        tecnicos_responsavel:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+          x-go-extra-tags:
+            validate: "required,min=1,dive,uuid"
+      required:
+        - descricao_defeito
+        - data_ocorrencia
+        - nivel_dificuldade
+        - solicitante
+        - descricao_solucao
+        - tecnicos_responsavel
+      x-stoplight:
+        id: iy7ygf52x70mt
+
+    Resp200:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-extra-tags:
+            validate: "required,uuid"
+        message:
+          type: string
+          x-go-extra-tags:
+            validate: "required"
+      required:
+        - id
+        - message
+      x-stoplight:
+        id: kr2l3o0c4fgus
+    Resp204:
+      type: object
+      properties:
+        message:
+          type: string
+          x-go-extra-tags:
+            validate: "required"
+      required:
+        - message
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+      x-stoplight:
+        id: 4qyss6rpqies8

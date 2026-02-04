@@ -1,0 +1,96 @@
+name: CI/CD - Deploy olidesk-api
+on:
+  push:
+    branches:
+      - master
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "1.25"
+      - name: Format with go fmt
+        run: test -z "$(gofmt -l .)" || (echo "Go files are not formatted" && exit 1)
+
+      - name: Lint with go vet
+        run: go vet ./...
+  tidy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "1.25"
+      - name: Tidy with go mod tidy
+        run: |
+          go mod tidy
+          git diff --exit-code || (echo "Go modules are not tidy" && exit 1)
+  test:
+    runs-on: ubuntu-latest
+    needs: [lint, tidy]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "1.25"
+      - name: Rodar testes
+        run: go test ./...
+  coverage:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "1.25"
+      - name: Gerar cobertura
+        run: |
+          go test -coverprofile=coverage.out ./...
+          go tool cover -html=coverage.out -o coverage.html
+          go tool cover -html=coverage.out -o coverage.html | grep total | awk '{print $3}' | xargs -I {} echo "coverage: {}%"
+      - name: Validar cobertura
+        run: |
+          COV=$(cat coverage.txt | sed 's/%//')
+          MIN=0
+          echo "coverage: $$COV%"
+          if [ "$$COV" -lt "$$MIN" ]; then
+            echo "Coverage is below minimum threshold"
+            exit 1
+          fi
+  build-and-push:
+    needs: [lint, tidy, test, coverage]
+    if: ${{ !contains(github.event.head_commit.message, 'Update tag in values helm') }}
+    name: 'Build and Push'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.25'
+
+    - name: Generate SHA
+      id: generate_sha
+      run: |
+        SHA=$(echo $GITHUB_SHA | head -c7)
+        echo "sha=$SHA" >> $GITHUB_OUTPUT
+    
+    - name: Login into the container registry
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: |
+          duddy571/sperium-api:${{ steps.generate_sha.outputs.sha }}
+          duddy571/sperium-api:latest
