@@ -800,7 +800,7 @@ components:
           minLength: 11
           maxLength: 18
           x-go-extra-tags:
-            validate: "required,cpf_cnpj"
+            validate: "required,min=11,max=18"
 
         email_contato:
           type: string
