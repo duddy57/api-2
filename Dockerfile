@@ -1,5 +1,5 @@
 ## Builder Stage
-FROM golang:1.25-alpine AS builder
+FROM golang:1.24-alpine AS builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
@@ -8,11 +8,13 @@ RUN CGO_ENABLED=0 go build \
     -a -installsuffix cgo \
     -ldflags='-w -s -extldflags "-static"' \
     -trimpath \
-    -o ./bin/api ./cmd/main.go
+    -o ./dist/api ./cmd/main.go
 
 ## Api Stage
-FROM scratch
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
 WORKDIR /app
-COPY --from=builder ./bin/api .
+COPY --from=builder /app/dist/api .
+COPY --from=builder /app/internal/handlers/spec ./internal/handlers/spec
 EXPOSE 8080
 ENTRYPOINT ["./api"]
