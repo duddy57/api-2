@@ -3,7 +3,11 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY . .
-RUN go build -o /bin/api ./cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
+    -a -installsuffix cgo \
+    -ldflags='-w -s -extldflags "-static"' \
+    -trimpath \
+    -o /app/bin/api ./cmd/main.go
 
 FROM scratch
 WORKDIR /app
