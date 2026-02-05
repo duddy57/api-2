@@ -9,9 +9,10 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build \
     -trimpath \
     -o /app/bin/api ./cmd/main.go
 
-FROM scratch
+FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /bin/api .
+RUN apk add --no-cache ca-certificates
+COPY --from=builder /app/bin/api .
 COPY --from=builder /app/internal/handlers/spec ./internal/handlers/spec
 EXPOSE 8080
 ENTRYPOINT ["./api"]
